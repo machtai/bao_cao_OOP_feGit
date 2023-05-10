@@ -75,35 +75,19 @@ class _bottomNavigatorBarState extends State<bottomNavigatorBar> {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      
+                      print("về trang chủ");
+                    },
                   ),
-                  Row(
-                    children: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.shopping_cart,
-                            color: ColorApp,
-                          )),
-                      IconButton(
-                          onPressed: () {
-                            // Navigator.push(
-                            //     context,
-                            //     CupertinoPageRoute(
-                            //         builder: (context) => const ));
-                          },
-                          icon: Icon(
-                            Icons.camera_alt,
-                            color: ColorApp,
-                          )),
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.person,
-                            color: ColorApp,
-                          )),
-                    ],
-                  )
+                  IconButton(
+                      onPressed: () {
+                        print('sdagasd');
+                      },
+                      icon: Icon(
+                        Icons.person,
+                        color: ColorApp,
+                      ))
                 ],
               ),
             ),
@@ -111,26 +95,3 @@ class _bottomNavigatorBarState extends State<bottomNavigatorBar> {
     );
   }
 }
-
-
-
-  // BottomNavigationBar(
-          
-  //           items: const <BottomNavigationBarItem>[
-  //             BottomNavigationBarItem(
-  //               icon: Icon(Icons.home),
-  //             label: 'Trang chủ',
-  //             ),
-  //             BottomNavigationBarItem(
-  //               icon: Icon(Icons.business),
-  //               label: 'Business',
-  //             ),
-  //             BottomNavigationBarItem(
-  //               icon: Icon(Icons.school),
-  //               label: 'School',
-  //             ),
-  //           ],
-  //           currentIndex: _selectedIndex,
-  //           selectedItemColor: Colors.amber[800],
-  //           onTap: _onItemTapped,
-  //         ),

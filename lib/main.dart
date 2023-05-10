@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:smart_food/login/index.dart';
 import 'package:smart_food/register/index.dart';
-import 'package:smart_food/register/view/success.dart';
-import 'package:smart_food/infoRes/index.dart';
+import 'package:smart_food/testMap.dart';
+import 'package:smart_food/testRegister.dart';
 
 import 'homepage/index.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -27,11 +27,11 @@ class MyApp extends StatelessWidget {
 }
 
 final List<Widget> pages = [
-  const Login(),
+  RestaurantList(),
+  Login(),
   const Register(),
   const homePage(),
-  const Success(),
- const ImageBottomSheet()
+MapLauncherDemo()
 ];
 
 class HomePage extends StatefulWidget {
@@ -48,8 +48,9 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: false,
       body: MaterialApp(
       
-        home: pages[4],
+        home: pages[3],
       ),
     );
   }
 }
+

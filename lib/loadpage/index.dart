@@ -1,12 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_food/color.dart';
-import 'package:smart_food/login/index.dart';
 
 import '../homepage/index.dart';
 
@@ -35,9 +33,9 @@ class _LoadPageState extends State<LoadPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SpinKitSpinningLines(
+            SpinKitWave(
               color: ColorApp,
-              size: 150,
+              size: 30,
             ),
             SizedBox(
               height: 20,
