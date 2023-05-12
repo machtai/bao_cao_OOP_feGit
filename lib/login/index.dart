@@ -21,26 +21,6 @@ class _LoginState extends State<Login> {
   bool _isLoading = false;
   String _errorMessage = '';
 
-String? validatePhoneNumber(String? value) {
-  String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-  RegExp regExp = new RegExp(pattern);
-  if (value == null || value.isEmpty) {
-    return 'Vui lòng nhập số điện thoại';
-  } else if (!regExp.hasMatch(value)) {
-    return 'Số điện thoại không hợp lệ';
-  }
-  return null;
-}
-
-
-String? validatePassword(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Vui lòng nhập mật khẩu';
-  } else if (value.length < 6) {
-    return 'Mật khẩu phải có ít nhất 6 ký tự';
-  }
-  return '';
-}
 
 
  void _submitForm() async {

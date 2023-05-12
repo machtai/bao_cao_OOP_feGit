@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_food/color.dart';
 import 'package:smart_food/homepage/view/botomnavigaterbar.dart';
-import 'package:smart_food/login/index.dart';
 import 'package:http/http.dart' as http;
+
+import '../menuRestaurant/index.dart';
+import '../Map.dart';
 
 class Restaurant {
   final String id;
@@ -70,7 +70,7 @@ class _homePage extends State<homePage> {
               .toList();
         });
 
-        print(response.body);
+      
       } else {
         throw Exception('Failed to load restaurants');
       }
@@ -86,77 +86,88 @@ class _homePage extends State<homePage> {
     }).toList();
     return SafeArea(
       child: Scaffold(
-          backgroundColor: Colors.grey[100],
-          body: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-              child:
-                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                        child: Text(
-                      'Các nhà hàng ngon gần đây',
-                      style: GoogleFonts.roboto(
-                          fontSize: 25, fontWeight: FontWeight.w600),
-                    )),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Icon(
-                      Icons.notifications,
-                      color: ColorApp,
-                      size: 30,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                TextField(
-                  onChanged: (value) {
-                    setState(() {
-                      _searchQuery = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 255, 239, 224),
-                    hintText: 'Tìm kiếm',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide.none,
-                    ),
-                    suffixIcon: Icon(
-                      Icons.search,
-                      color: Colors.orange,
-                    ),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+        backgroundColor: Colors.grey[100],
+        body: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                      child: Text(
+                    'Các nhà hàng ngon gần đây',
+                    style: GoogleFonts.roboto(
+                        fontSize: 25, fontWeight: FontWeight.w600),
+                  )),
+                  SizedBox(
+                    width: 10,
                   ),
+                  Icon(
+                    Icons.notifications,
+                    color: ColorApp,
+                    size: 30,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              TextField(
+                onChanged: (value) {
+                  setState(() {
+                    _searchQuery = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color.fromARGB(255, 255, 239, 224),
+                  hintText: 'Tìm kiếm',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide.none,
+                  ),
+                  suffixIcon: Icon(
+                    Icons.search,
+                    color: Colors.orange,
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                 ),
-                SizedBox(
-                  height: 30,
-                ),
-                Expanded(
-                    child: FadeIn(
-                        duration: Duration(milliseconds: 1000),
-                        child: ListView.builder(
-                            itemCount: filteredRestaurants.length,
-                            itemBuilder: (context, index) {
-                              final restaurant = filteredRestaurants[index];
-                              return Container(
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Expanded(
+                  child: FadeIn(
+                      duration: Duration(milliseconds: 1000),
+                      child: ListView.builder(
+                          itemCount: filteredRestaurants.length,
+                          itemBuilder: (context, index) {
+                            final restaurant = filteredRestaurants[index];
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          MenuRes(
+                                            restaurantId: restaurant.id,
+                                          )),
+                                );
+                              },
+                              child: 
+                              Container(
                                   margin: EdgeInsets.symmetric(
                                       vertical: 15, horizontal: 0),
                                   padding: EdgeInsets.symmetric(
                                       vertical: 15, horizontal: 0),
-                                  decoration: BoxDecoration(
+                                  decoration: BoxDecoration(boxShadow: kElevationToShadow[2],
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: ListTile(
-                                      leading: Image.asset(
-                                        'img/nhahang.jpg',
-                                         // restaurant.img,
+                                      leading: Image.asset('img/nhahang.jpg',
+                                          // restaurant.img,
                                           fit: BoxFit.cover),
                                       title: Text(restaurant.name,
                                           style: GoogleFonts.roboto(
@@ -171,19 +182,25 @@ class _homePage extends State<homePage> {
                                                     color: const Color.fromARGB(
                                                         255, 170, 187, 186))),
                                             SizedBox(height: 5),
-                                            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Spacer(),
                                                 RatingBar.builder(
-                                                  initialRating: restaurant.rating,
+                                                  initialRating:
+                                                      restaurant.rating,
                                                   minRating: 1,
                                                   itemSize: 12,
                                                   direction: Axis.horizontal,
                                                   allowHalfRating: true,
                                                   itemCount: 5,
-                                                  itemPadding: EdgeInsets.symmetric(
-                                                      horizontal: 0.5),
-                                                  itemBuilder: (context, _) => Icon(
+                                                  itemPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 0.5),
+                                                  itemBuilder: (context, _) =>
+                                                      Icon(
                                                     Icons.star,
                                                     color: Colors.amber,
                                                   ),
@@ -193,11 +210,12 @@ class _homePage extends State<homePage> {
                                                 ),
                                               ],
                                             ),
-                                          ]))));
-                            }))),
-              ])),
-          bottomNavigationBar: bottomNavigatorBar(),
-         ),
+                                          ])))),
+                            );
+                          }))),
+            ])),
+        bottomNavigationBar: bottomNavigatorBar(),
+      ),
     );
   }
 }
