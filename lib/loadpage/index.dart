@@ -21,7 +21,7 @@ class _LoadPageState extends State<LoadPage> {
     setState(() {
       Future.delayed(const Duration(seconds: 3), () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => homePage()));
+            context, MaterialPageRoute(builder: (context) => RestaurantPage()));
       });
     });
   }

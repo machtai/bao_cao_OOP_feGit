@@ -25,6 +25,7 @@ class _SuccessState extends State<Success> {
       });
     });
   }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -33,13 +34,13 @@ class _SuccessState extends State<Success> {
           mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Đăng ký thành công',style: GoogleFonts.roboto(fontSize: 20),),
-          SizedBox(height: 20,),
-          SpinKitDoubleBounce(
+          const SizedBox(height: 20,),
+          SpinKitWave(
               color: ColorApp,
               size: 100,
             ),
-            SizedBox(height: 50,),
-            Text('Hệ thống sẽ tự động quay về trang đăng nhập sau 2s',style: TextStyle(fontSize: 10),)
+            const SizedBox(height: 50,),
+            const Text('Hệ thống sẽ tự động quay về trang đăng nhập sau 2s',style: TextStyle(fontSize: 10),)
         ],
         ),
       ),

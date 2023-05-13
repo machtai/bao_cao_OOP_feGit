@@ -15,8 +15,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   
   bool _isLoading = false;
   String _errorMessage = '';
@@ -29,7 +29,7 @@ class _LoginState extends State<Login> {
       _errorMessage = '';
     });
 
-    final String apiUrl = 'http://14.225.205.198:8989/auth/login';
+    const String apiUrl = 'http://14.225.205.198:8989/auth/login';
 
     final response = await http.post(Uri.parse(apiUrl), body: {
       'phoneNumber': _phoneController.text,
@@ -53,9 +53,7 @@ class _LoginState extends State<Login> {
       // Xử lý lỗi phản hồi API
       setState(() {
         _errorMessage = 'Đăng nhập thất bại, vui lòng thử lại!';
-     print("==============================");    print(response.statusCode);
-        print("==============================");
-        print(response.body);
+    
       });
     }
 
@@ -68,17 +66,15 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    String _username, _password;
     return Scaffold(
 
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: size.height * 0.75,
                 child: Stack(
@@ -137,7 +133,7 @@ class _LoginState extends State<Login> {
                                 )),
                             SizedBox(height: size.height * 0.05),
                            if (_isLoading)
-                  Center(
+                  const Center(
                     child: CircularProgressIndicator(),
                   )
                 else  ElevatedButton(
@@ -178,21 +174,19 @@ class _LoginState extends State<Login> {
                 ),
               ),
               SizedBox(height: size.height * 0.01),
-              Container(
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ButtonLogIn(
-                        text: "Facebook",
-                        icon: Icon(Icons.facebook), 
-                        color: Color(0xFF35A6EF),
-                      ),
-                      ButtonLogIn(
-                          text: "Google   ",
-                          icon: Icon(Icons.chrome_reader_mode_outlined),
-                          color: Color(0xFF5073B5)),
-                    ]),
-              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ButtonLogIn(
+                      text: "Facebook",
+                      icon: Icon(Icons.facebook), 
+                      color: Color(0xFF35A6EF),
+                    ),
+                    ButtonLogIn(
+                        text: "Google   ",
+                        icon: Icon(Icons.chrome_reader_mode_outlined),
+                        color: Color(0xFF5073B5)),
+                  ]),
               SizedBox(height: size.height * 0.01),
               TextButton(
                   onPressed: () {

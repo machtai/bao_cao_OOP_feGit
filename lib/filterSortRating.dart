@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class MyAppp extends StatefulWidget {
+class SortByRating extends StatefulWidget {
   @override
-  _MyApppState createState() => _MyApppState();
+  _SortByRatingState createState() => _SortByRatingState();
 }
 
-class _MyApppState extends State<MyAppp> {
+class _SortByRatingState extends State<SortByRating> {
   String dropdownValue = '5 sao';
   List<String> ratings = ['1 sao', '2 sao', '3 sao', '4 sao', '5 sao'];
   List<dynamic> restaurants = [];

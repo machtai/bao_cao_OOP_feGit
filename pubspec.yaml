@@ -54,6 +54,9 @@ dependencies:
   #####
   url_launcher: ^6.1.11
   url_launcher_android: ^6.0.0
+  #####profile
+  dio: ^5.1.2
+  provider: ^6.0.5
 dev_dependencies:
   flutter_test:
     sdk: flutter

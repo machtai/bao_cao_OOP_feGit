@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smart_food/login/index.dart';
 import 'package:smart_food/register/index.dart';
-import 'package:smart_food/Map.dart';
-import 'package:smart_food/testMap.dart';
-import 'package:smart_food/filterSortRating.dart';
-import 'package:smart_food/testdistance.dart';
 
+import 'User/testProfile.dart';
 import 'homepage/index.dart';
 
 
@@ -30,14 +27,11 @@ class MyApp extends StatelessWidget {
 }
 
 final List<Widget> pages = [
- NearbyPlacesScreen(),
-  //filter sort
-MyAppp(),
-//login
+
+  ProfileScreen(),
   Login(),
   const Register(),
-  const homePage(),
-MapLauncherDemo()
+  const RestaurantPage(),
 ];
 
 class HomePage extends StatefulWidget {
@@ -54,7 +48,7 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: false,
       body: MaterialApp(
       
-        home: pages[4],
+        home: pages[2],
       )
     );
   }

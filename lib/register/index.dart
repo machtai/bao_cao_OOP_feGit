@@ -17,18 +17,16 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+ final TextEditingController _passwordController = TextEditingController();
+ final TextEditingController _emailController = TextEditingController();
 
  
-  bool _isLoading = false;
   String _errorMessage = '';
   final _formKey = GlobalKey<FormState>();
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
-        _isLoading = true;
         _errorMessage = '';
       });
 
@@ -64,7 +62,6 @@ class _RegisterState extends State<Register> {
       }
 
       setState(() {
-        _isLoading = false;
       });
     }
   }

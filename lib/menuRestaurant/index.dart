@@ -3,14 +3,19 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:map_launcher/map_launcher.dart';
 
-import '../Map.dart';
 
 class MenuRes extends StatefulWidget {
   final String restaurantId;
+  final double lat;
+  final double lng;
   const MenuRes({
+    required this.lat,
+    required this.lng,
     required this.restaurantId,
     Key? key,
   }) : super(key: key);
@@ -81,7 +86,7 @@ class _MenuResState extends State<MenuRes> {
               Container(
                 margin: EdgeInsets.only(top: 20),
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 252, 251, 250),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     //color: Color.fromARGB(255, 255, 255, 255),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30.0), // Border radius top left
@@ -108,7 +113,7 @@ class _MenuResState extends State<MenuRes> {
                           return ListView(children: [
                             ListTile(
                               title: Wrap(
-                              alignment: WrapAlignment.spaceBetween,
+                                alignment: WrapAlignment.spaceBetween,
                                 children: [
                                   Text(snapshot.data!.name,
                                       style: GoogleFonts.roboto(
@@ -132,8 +137,16 @@ class _MenuResState extends State<MenuRes> {
                               subtitle: Row(children: [
                                 GestureDetector(
                                     onTap: () {
-                                      MapUtils.openMap(
-                                          snapshot.data!.lat,  snapshot.data!.lng);
+                                      openMapsSheet(
+                                          context, widget.lat, widget.lng);
+                                      //        Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           MapLauncherDemo(lat: snapshot.data!.lat,lng: snapshot.data!.lng))
+                                      // );
+                                      // MapUtils.openMap(
+                                      //     snapshot.data!.lat,  snapshot.data!.lng);
                                     },
                                     child: Row(children: [
                                       Icon(
@@ -234,17 +247,17 @@ class _MenuResState extends State<MenuRes> {
                                 padding: EdgeInsets.symmetric(
                                     vertical: 15, horizontal: 0),
                                 decoration: BoxDecoration(
-                                boxShadow: kElevationToShadow[2]
- ,                                   color: Colors.white,
+                                    boxShadow: kElevationToShadow[2],
+                                    color: Colors.white,
                                     borderRadius: BorderRadius.circular(10)),
                                 child: ListTile(
                                   leading: Image.asset('img/nhahang.jpg',
                                       // restaurant.img,
                                       fit: BoxFit.cover),
                                   title: Text('${product.title}',
-                                         style: GoogleFonts.roboto(
-                                             fontSize: 14,
-                                             fontWeight: FontWeight.w500)),
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500)),
                                   subtitle: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -283,6 +296,44 @@ class _MenuResState extends State<MenuRes> {
             ])
           ])
         ]))));
+  }
+
+  openMapsSheet(BuildContext context, double lat, double lng) async {
+    try {
+      final title = "";
+      final availableMaps = await MapLauncher.installedMaps;
+
+      showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SafeArea(
+            child: SingleChildScrollView(
+              child: Container(
+                child: Wrap(
+                  children: <Widget>[
+                    for (var map in availableMaps)
+                      ListTile(
+                        onTap: () => map.showMarker(
+                          coords: Coords(lat, lng),
+                          title: title,
+                        ),
+                        title: Text(map.mapName),
+                        leading: SvgPicture.asset(
+                          map.icon,
+                          height: 30.0,
+                          width: 30.0,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      print(e);
+    }
   }
 }
 

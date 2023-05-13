@@ -7,6 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:smart_food/color.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../User/testProfile.dart';
+
 class bottomNavigatorBar extends StatefulWidget {
   const bottomNavigatorBar({super.key});
 
@@ -82,7 +84,10 @@ class _bottomNavigatorBarState extends State<bottomNavigatorBar> {
                   ),
                   IconButton(
                       onPressed: () {
-                        print('sdagasd');
+                          Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ProfileScreen()),
+      );
                       },
                       icon: Icon(
                         Icons.person,
