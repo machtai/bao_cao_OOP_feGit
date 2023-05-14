@@ -116,7 +116,7 @@ class _RestaurantPage extends State<RestaurantPage> {
                         ),
                         Icon(
                           Icons.notifications,
-                          color: ColorApp,
+                          color: Color(0xff005AA7),
                           size: 30,
                         ),
                       ],

@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:smart_food/color.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:smart_food/homepage/index.dart';
 
 import '../../User/testProfile.dart';
 
@@ -64,7 +65,7 @@ class _bottomNavigatorBarState extends State<bottomNavigatorBar> {
                       children: [
                         Icon(
                           Icons.home,
-                          color: ColorApp,
+                          color: Color(0xff005AA7),
                         ),
                         SizedBox(
                           width: 10,
@@ -78,20 +79,23 @@ class _bottomNavigatorBarState extends State<bottomNavigatorBar> {
                       ],
                     ),
                     onPressed: () {
-                      
-                      print("về trang chủ");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RestaurantPage()));
                     },
                   ),
                   IconButton(
                       onPressed: () {
-                          Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ProfileScreen()),
-      );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileScreen()),
+                        );
                       },
                       icon: Icon(
                         Icons.person,
-                        color: ColorApp,
+                        color: Color(0xff005AA7),
                       ))
                 ],
               ),

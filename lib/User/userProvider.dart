@@ -1,30 +1,48 @@
-import 'dart:convert';
+// import 'package:flutter/material.dart';
+// import 'package:smart_food/User/userModal.dart';
+
+// class UserProvider with ChangeNotifier {
+//   UserModel? _user;
+
+//   UserModel? get user => _user;
+
+//   void setUser(UserModel user) {
+//     _user = user;
+//     notifyListeners();
+//   }
+
+//   void clearUser() {
+//     _user = null;
+//     notifyListeners();
+//   }
+// }
 
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
-
 import 'package:smart_food/User/userModal.dart';
 
-class UserProvider extends ChangeNotifier {
-  UserModel? _user;
+class UserProvider with ChangeNotifier {
+  late String _accessToken;
+  late String _refreshToken;
+
+  String get accessToken => _accessToken;
+  String get refreshToken => _refreshToken;
+
+  setTokens(String accessToken, String refreshToken) {
+    _accessToken = accessToken;
+    _refreshToken = refreshToken;
+    notifyListeners();
+  }
+    UserModel? _user;
 
   UserModel? get user => _user;
 
-  Future<void> login(String phoneNumber, String password) async {
-    final response = await http.post(
-      Uri.parse('http://14.225.205.198:8989/auth/login'),
-      body: {
-        'phoneNumber': phoneNumber,
-        'password': password,
-      },
-    );
+  void setUser(UserModel user) {
+    _user = user;
+    notifyListeners();
+  }
 
-    if (response.statusCode == 200) {
-      final userJson = jsonDecode(response.body)['user'];
-      _user = UserModel.fromJson(userJson);
-      notifyListeners();
-    } else {
-      throw Exception('Failed to login');
-    }
+  void clearUser() {
+    _user = null;
+    notifyListeners();
   }
 }
